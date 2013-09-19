@@ -22,29 +22,14 @@ public class NoteDetailActivity extends Activity {
         setContentView(R.layout.activity_note_detail);
 
         Intent intent = getIntent();
-
-        String fileName = intent.getStringExtra("file");
+        String name = intent.getStringExtra("name");
+        String contents = intent.getStringExtra("contents");
 
         TextView title = (TextView) findViewById(R.id.noteTitle);
         TextView noteText = (TextView) findViewById(R.id.noteText);
 
-        title.setText(fileName);
-        StringBuilder fileText = new StringBuilder();
-        try{
-            FileInputStream fis = openFileInput(fileName);
-            InputStreamReader inputStreamReader = new InputStreamReader(fis);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String line;
-            while ((line = bufferedReader.readLine()) != null){
-                fileText.append(line);
-                fileText.append('\n');
-            }
-
-        }catch (IOException e){
-            Log.e("IOException", e.getMessage());
-        }
-
-        noteText.setText(fileText.toString());
+        title.setText(name);
+        noteText.setText(contents);
 
     }
 }
